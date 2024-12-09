@@ -19,7 +19,7 @@ if ($operation == 1) {
 } elseif ($operation == 4) {
     if ($num2 != 0) {
         $result = $num1 / $num2;
-        echo "Resultado: $num1 / $num2 = $result\n";
+        echo "Resultado: $num1 / $num2 = $result\n"; 
     } else {
         echo "Error: No se puede dividir entre cero.\n";
     }

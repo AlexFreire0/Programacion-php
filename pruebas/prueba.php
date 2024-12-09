@@ -1,0 +1,12 @@
+<?php
+//Crea un programa que pida al usuario dos números y muestre el resultado de todas las operaciones aritméticas básicas entre ellos.
+
+$numero1 = readline('Dame el primer número: ');
+$numero2 = readline('Dame el segundo número: ');
+
+echo "La suma de " . $numero1 . " y " . $numero2 . " es: " . $numero1+$numero2
+
+
+
+
+?>

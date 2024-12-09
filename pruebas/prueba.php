@@ -1,10 +1,18 @@
 <?php
-//Crea un programa que pida al usuario dos números y muestre el resultado de todas las operaciones aritméticas básicas entre ellos.
+//error_reporting(E_WARNING);
+//error_reporting(0);
+function dividir($a, $b) {
+    if ($b == 0) {
+        throw new Exception("No se puede dividir entre cero.");
+    }
+    return $a / $b;
+}
 
-$numero1 = readline('Dame el primer número: ');
-$numero2 = readline('Dame el segundo número: ');
-
-echo "La suma de " . $numero1 . " y " . $numero2 . " es: " . $numero1+$numero2
+try {
+    echo dividir(10, 0);
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
 
 
 

@@ -13,6 +13,8 @@ if ($opcion === 'clientes') {
     $contenido = generarTabla("datos/clientes.csv", "cliente");
 } elseif ($opcion === 'articulos') {
     $contenido = generarTabla("datos/articulos.csv", "articulo");
+} elseif ($opcion === 'proveedores') {
+    $contenido = generarTabla("datos/proveedores.csv", "proveedor");
 } else {
     $contenido = "<p>Opción no válida</p>";
 }

@@ -7,6 +7,6 @@ class circulo {
     }
 }
 $micirculo = new circulo;
-$micirculo->radio = 15;
+$micirculo->radio = 5;
 $micirculo->mostrarinfo()
 ?>

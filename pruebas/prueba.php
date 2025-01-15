@@ -46,5 +46,5 @@ class perro extends bicho {
 $miperro = new bicho("guau", 4, "Perro");
 $miperro-> verdetalles();
 
-$paco = new perro;
+$paco = new perro("Miau", 4, "perro");
 ?>

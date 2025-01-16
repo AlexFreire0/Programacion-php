@@ -21,7 +21,7 @@ class Tarea {
     }
 
     public function mostrarTarea() {
-        echo "Nombre: " . $this->nombre . "\nDescripción: " . $this->descripcion . "\nFecha Límite: " . $this->fechaLimite . "\nEstado: " . $this->estado . "\n\n";
+        echo "\nNombre: " . $this->nombre . "\nDescripción: " . $this->descripcion . "\nFecha Límite: " . $this->fechaLimite . "\nEstado: " . $this->estado . "\n";
     }
 }
 
@@ -32,11 +32,6 @@ $tareas = [
     new Tarea("Estudiar PHP", "Revisar conceptos básicos de clases y objetos", "2025-01-25")
 ];
 
-// Mostrar todas las tareas antes de realizar cambios
-echo "Tareas antes de realizar cambios:\n";
-foreach ($tareas as $tarea) {
-    $tarea->mostrarTarea();
-}
 
 // Marcar la primera tarea como completada
 $tareas[0]->marcarComoCompletada();
@@ -45,7 +40,6 @@ $tareas[0]->marcarComoCompletada();
 $tareas[1]->editarDescripcion("Ir al gimnasio para entrenar fuerza a las 19:00");
 
 // Mostrar todas las tareas después de los cambios
-echo "Tareas después de realizar cambios:\n";
 foreach ($tareas as $tarea) {
     $tarea->mostrarTarea();
 }

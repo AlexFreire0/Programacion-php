@@ -43,3 +43,4 @@ $tareas[1]->editarDescripcion("Ir al gimnasio para entrenar fuerza a las 19:00")
 foreach ($tareas as $tarea) {
     $tarea->mostrarTarea();
 }
+?>

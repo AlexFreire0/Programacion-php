@@ -12,7 +12,7 @@ class EventoController {
         $this->modelo->agregarEvento($nombre_evento, $fecha, $lugar);
     }
 
-    public function listarEvento() {
+    public function listarEventos() {
         return $this->modelo->obtenerEventos();
     }
 

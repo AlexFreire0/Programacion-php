@@ -14,38 +14,33 @@ $eventos = $controller->listarEventos();
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4 text-center">Socios Registrados</h1>
+        <h1 class="mb-4 text-center">Eventos Registrados</h1>
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>ID_Evento</th>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Tel&eacute;fono</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Acciones</th>
+                    <th>Fecha</th>
+                    <th>Lugar</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($socios as $socio): ?>
                     <tr>
-                        <td><?= htmlspecialchars($socio['id_socio']) ?></td>
-                        <td><?= htmlspecialchars($socio['nombre']) ?></td>
-                        <td><?= htmlspecialchars($socio['apellido']) ?></td>
-                        <td><?= htmlspecialchars($socio['email']) ?></td>
-                        <td><?= htmlspecialchars($socio['telefono']) ?></td>
-                        <td><?= htmlspecialchars($socio['fecha_nacimiento']) ?></td>
+                        <td><?= htmlspecialchars($socio['id_evento']) ?></td>
+                        <td><?= htmlspecialchars($socio['nombre_evento']) ?></td>
+                        <td><?= htmlspecialchars($socio['fecha']) ?></td>
+                        <td><?= htmlspecialchars($socio['lugar']) ?></td>
                         <td>
-                            <a href="editar_socio.php?id=<?= urlencode($socio['id_socio']) ?>" class="btn btn-sm btn-warning">Editar</a>
-                            <a href="eliminar_socio.php?id=<?= urlencode($socio['id_socio']) ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                            <a href="editar_evento.php?id=<?= urlencode($socio['id_evento']) ?>" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="eliminar_socio.php?id=<?= urlencode($socio['id_evento']) ?>" class="btn btn-sm btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
         <div class="text-center mt-4">
-            <a href="alta_socio.php" class="btn btn-primary">Agregar un nuevo socio</a>
+            <a href="alta_evento.php" class="btn btn-primary">Agregar un nuevo evento</a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

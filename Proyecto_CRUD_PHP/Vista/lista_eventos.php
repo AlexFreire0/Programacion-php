@@ -9,7 +9,7 @@ $eventos = $controller->listarEventos();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Socios</title>
+    <title>Listado de eventos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -22,18 +22,19 @@ $eventos = $controller->listarEventos();
                     <th>Nombre</th>
                     <th>Fecha</th>
                     <th>Lugar</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($socios as $socio): ?>
+                <?php foreach ($eventos as $evento): ?>
                     <tr>
-                        <td><?= htmlspecialchars($socio['id_evento']) ?></td>
-                        <td><?= htmlspecialchars($socio['nombre_evento']) ?></td>
-                        <td><?= htmlspecialchars($socio['fecha']) ?></td>
-                        <td><?= htmlspecialchars($socio['lugar']) ?></td>
+                        <td><?= htmlspecialchars($evento['id_evento']) ?></td>
+                        <td><?= htmlspecialchars($evento['nombre_evento']) ?></td>
+                        <td><?= htmlspecialchars($evento['fecha']) ?></td>
+                        <td><?= htmlspecialchars($evento['lugar']) ?></td>
                         <td>
-                            <a href="editar_evento.php?id=<?= urlencode($socio['id_evento']) ?>" class="btn btn-sm btn-warning">Editar</a>
-                            <a href="eliminar_socio.php?id=<?= urlencode($socio['id_evento']) ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                            <a href="editar_evento.php?id=<?= urlencode($evento['id_evento']) ?>" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="eliminar_evento.php?id=<?= urlencode($evento['id_evento']) ?>" class="btn btn-sm btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

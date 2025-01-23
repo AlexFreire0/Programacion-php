@@ -1,6 +1,6 @@
 <?php
 require_once '../controlador/EventosController.php';
-$controller = new EventoController();
+$controller = new EventosController();
 $eventos = $controller->listarEventos();
 ?>
 

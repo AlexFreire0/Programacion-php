@@ -1,7 +1,7 @@
 <?php
 require_once '../modelo/class_evento.php';
 
-class EventoController {
+class EventosController {
     private $modelo;
 
     public function __construct() {

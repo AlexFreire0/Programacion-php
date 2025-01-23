@@ -52,3 +52,24 @@ INSERT INTO socios (nombre, apellido, email, telefono, fecha_nacimiento) VALUES
 ('Pedro', 'Fuentes', 'pedro.fuentes@example.com', '600000019', '1988-07-04'),
 ('Isabel', 'Cruz', 'isabel.cruz@example.com', '600000020', '1999-03-15');
 
+INSERT INTO eventos (nombre_evento, fecha, lugar) VALUES
+('Torneo de Fútbol Primavera', '2025-03-15', 'Estadio Central'),
+('Competencia de Natación Juvenil', '2025-04-10', 'Piscina Olímpica'),
+('Maratón Anual', '2025-05-05', 'Parque de la Ciudad'),
+('Clase Magistral de Yoga', '2025-06-20', 'Sala de Actividades 3'),
+('Campeonato de Ajedrez', '2025-07-12', 'Salón de Conferencias'),
+('Exhibición de Taekwondo', '2025-08-18', 'Gimnasio Principal'),
+('Carrera de Bicicletas', '2025-09-01', 'Circuito Urbano'),
+('Torneo de Tenis Abierto', '2025-10-08', 'Cancha de Tenis 1'),
+('Festival de Deportes Acuáticos', '2025-11-14', 'Club Náutico'),
+('Competencia de Levantamiento de Pesas', '2025-12-05', 'Sala de Pesas'),
+('Clínica de Atletismo', '2025-01-25', 'Estadio de Atletismo'),
+('Torneo de Baloncesto Sub-18', '2025-02-15', 'Polideportivo Sur'),
+('Demostración de Artes Marciales', '2025-03-30', 'Gimnasio Secundario'),
+('Competencia de Escalada', '2025-04-25', 'Muro de Escalada'),
+('Torneo de Pádel Nocturno', '2025-05-12', 'Pista de Pádel Central'),
+('Competencia de Voleibol Playa', '2025-06-10', 'Zona de Playa Artificial'),
+('Evento de Patinaje Artístico', '2025-07-22', 'Pista de Hielo'),
+('Clínica de Entrenamiento Funcional', '2025-08-05', 'Gimnasio de Entrenamiento 2'),
+('Torneo de Badminton', '2025-09-19', 'Salón de Deportes'),
+('Jornada de Senderismo Familiar', '2025-10-03', 'Montaña de los Pinos');

@@ -20,6 +20,7 @@ CREATE TABLE eventos (
 );
 
 
+
 CREATE TABLE inscripciones (
   id_inscripcion INT AUTO_INCREMENT PRIMARY KEY,
   id_socio INT,

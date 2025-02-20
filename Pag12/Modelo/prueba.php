@@ -1,71 +1,102 @@
 <?php
-// 1. Configuración: Definimos el puerto y construimos la URL local.
-// Dado que LM Studio se ejecuta en local, usamos 'localhost'.
-// Asegúrate de que LM Studio esté corriendo en el puerto 8000.
-$puerto = '1234';
-$url = "http://localhost:$puerto/v1/chat/completions";  // Asegúrate de que este endpoint coincide con el expuesto por LM Studio.
+require_once '../config/db_config.php';
 
-// 2. Preparar los datos a enviar.
-// Creamos un array con la información que queremos enviar al modelo.
-// En este ejemplo, enviamos un mensaje (prompt) y configuramos un parámetro como el número máximo de tokens.
+class Receta {
+    private $conexion;
 
+    public function __construct() {
+        $this->conexion = new Conexion();
+    }
 
-$datos = array(
-    "model"=> "llama-3.2-1b-instruct",
-    "messages"=> 
-    array(
-        array("role"=> "system", "content"=> "Responde siempre en español"),
-        array("role"=> "user", "content"=> "Dame unicamente los ingredientes de la receta del atún con tomate")
-    ),
-    "temperature"=> 0.7,
-    "max_tokens"=> -1,
-    "stream"=> false
-);
+    // Agregar una nueva tarea y asignarla a un usuario
+    public function agregarReceta($nombre_receta) {
+        // Aumentar el tiempo máximo de ejecución
+        set_time_limit(300);
 
+        // 1. Configuración: Definimos el puerto y construimos la URL local.
+        $puerto = '1234';
+        $url = "http://localhost:$puerto/v1/chat/completions";
 
-// Convertir el array a formato JSON.
-$jsonDatos = json_encode($datos);
+        // 2. Preparar los datos a enviar.
+        $datos = array(
+            "model"=> "llama-3.2-1b-instruct",
+            "messages"=> 
+            array(
+                array("role"=> "system", "content"=> "Responde siempre en español"),
+                array("role"=> "user", "content"=> "Dame unicamente los ingredientes de la receta de $nombre_receta en formato html separandolos con <br>")
+            ),
+            "temperature"=> 0.7,
+            "max_tokens"=> -1,
+            "stream"=> false
+        );
 
-// 3. Inicializar cURL para preparar la petición.
-$ch = curl_init($url);
+        // Convertir el array a formato JSON.
+        $jsonDatos = json_encode($datos);
 
-// 4. Configurar cURL:
-// - Establecemos que usaremos el método POST.
-// - Indicamos que la respuesta se guarde en una variable en lugar de mostrarse directamente.
-// - Enviamos el cuerpo de la petición con nuestros datos en formato JSON.
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDatos);
+        // 3. Inicializar cURL para preparar la petición.
+        $ch = curl_init($url);
 
-// 5. Configurar las cabeceras HTTP necesarias.
-// Es fundamental indicar que el contenido enviado es de tipo JSON.
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json',
-    'Content-Length: ' . strlen($jsonDatos)
-));
+        // 4. Configurar cURL:
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDatos);
 
-// 6. Ejecutar la petición y capturar la respuesta del servidor.
-$respuesta = curl_exec($ch);
+        // 5. Configurar las cabeceras HTTP necesarias.
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($jsonDatos)
+        ));
 
-// 7. Comprobar si se produjo algún error en la comunicación.
-if (curl_errno($ch)) {
-    echo 'Error en cURL: ' . curl_error($ch);
-} else {
-    // Mostrar la respuesta recibida de LM Studio.
-    //echo "Respuesta de LM Studio: " . $respuesta;
-    // Decodificamos el JSON
-    $data = json_decode($respuesta, true);
+        // 6. Ejecutar la petición y capturar la respuesta del servidor.
+        $respuesta = curl_exec($ch);
 
-    // Accedemos al contenido del mensaje
-    $message = $data['choices'][0]['message']['content'];
+        // 7. Comprobar si se produjo algún error en la comunicación.
+        if (curl_errno($ch)) {
+            echo 'Error en cURL: ' . curl_error($ch);
+        } else {
+            $data = json_decode($respuesta, true);
+            $ingredientes = $data['choices'][0]['message']['content'];
+        }
 
-    // Mostramos el mensaje
-    echo $message;
+        // 8. Cerrar la sesión cURL para liberar recursos.
+        curl_close($ch);
 
+        // Repetir el proceso para obtener las instrucciones
+        $datos = array(
+            "model"=> "llama-3.2-1b-instruct",
+            "messages"=> 
+            array(
+                array("role"=> "system", "content"=> "Responde siempre en español"),
+                array("role"=> "user", "content"=> "Dame unicamente las instrucciones de la receta de $nombre_receta en formato html separandolos con <br>")
+            ),
+            "temperature"=> 0.7,
+            "max_tokens"=> -1,
+            "stream"=> false
+        );
 
+        $jsonDatos2 = json_encode($datos);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDatos2);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($jsonDatos2)
+        ));
 
+        $respuesta2 = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            echo 'Error en cURL: ' . curl_error($ch);
+        } else {
+            $data = json_decode($respuesta2, true);
+            $instrucciones = $data['choices'][0]['message']['content'];
+        }
+
+        curl_close($ch);
+
+        $sql = "INSERT INTO recetas (titulo, ingredientes, instrucciones) VALUES ('$nombre_receta', '$ingredientes', '$instrucciones')";
+        $this->conexion->conexion->query($sql);
+    }
 }
-
-// 8. Cerrar la sesión cURL para liberar recursos.
-curl_close($ch);
 ?>

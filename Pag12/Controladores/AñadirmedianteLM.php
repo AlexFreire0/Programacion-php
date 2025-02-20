@@ -1,5 +1,5 @@
 <?php
-require_once '../Modelo/prueba.php';
+require_once '../Modelo/class_receta.php';
 
 class AñadirmedianteLM
 {

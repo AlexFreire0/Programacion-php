@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Alta de Receta</h1>
-    <form action="../Controladores/AñadirmedianteLM.php" method="get">
+    <form action="../Controladores/Add_MedianteLM.php" method="get">
         <label for="nombre_receta">Nombre de la Receta:</label>
         <input type="text" id="nombre_receta" name="nombre_receta" required>
         <br><br>

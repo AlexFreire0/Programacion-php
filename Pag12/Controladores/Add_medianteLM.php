@@ -1,7 +1,7 @@
 <?php
 require_once '../Modelo/class_receta.php';
 
-class AñadirmedianteLM
+class AddmedianteLM
 {
     private $modelo;
 
@@ -21,7 +21,7 @@ class AñadirmedianteLM
 // Verificar si se ha enviado el nombre de la receta por GET
 if (isset($_GET['nombre_receta'])) {
     $nombre_receta = $_GET['nombre_receta'];
-    $controlador = new AñadirmedianteLM();
+    $controlador = new AddmedianteLM();
     $controlador->agregarReceta($nombre_receta);
     echo "Receta agregada exitosamente.";
 } else {

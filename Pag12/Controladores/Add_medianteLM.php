@@ -27,3 +27,4 @@ if (isset($_GET['nombre_receta'])) {
 } else {
     echo "Por favor, proporcione el nombre de la receta.";
 }
+?>
